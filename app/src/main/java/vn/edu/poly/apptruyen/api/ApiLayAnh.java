@@ -14,9 +14,11 @@ import vn.edu.poly.apptruyen.interfaces.LayTruyenVe;
 
 public class ApiLayAnh extends AsyncTask<Void,Void,Void> {
     String data;
+    String idChap;
     LayAnhVe layAnhVe;
-    public ApiLayAnh(LayAnhVe layAnhVe){
+    public ApiLayAnh(LayAnhVe layAnhVe, String idChap){
         this.layAnhVe= layAnhVe;
+        this.idChap= idChap;
         this.layAnhVe.batDau();
 
     }
@@ -26,7 +28,7 @@ public class ApiLayAnh extends AsyncTask<Void,Void,Void> {
         Request request= new Request.Builder()
                 //.url("https://api.myjson.com/bins/1g0002")
                 //.url("https://api.myjson.com/bins/uzts2")
-                .url("https://api.myjson.com/bins/19efri")
+                .url("http://holyshit2k.000webhostapp.com/layAnh.php?idChap="+idChap)
                 .build();
         data=null;
         try {

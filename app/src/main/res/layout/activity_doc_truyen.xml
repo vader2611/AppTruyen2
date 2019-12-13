@@ -45,4 +45,10 @@
         android:layout_marginBottom="30dp"
         android:paddingRight="10dp"
         android:background="@drawable/bg_so_trang"/>
+
+   <com.github.chrisbanes.photoview.PhotoView
+       android:id="@+id/photo_view"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"/>
+
 </RelativeLayout>

@@ -62,6 +62,7 @@ ChapTruyenAdapter chapTruyenAdapter;
     }
     private void setUp(){
         txvTenTruyens.setText(truyenTranh.getTenTruyen());
+        Glide.with(this).load(truyenTranh.getLinkAnh()).into(imgAnhTruyens);
 
 
         //lsvDanhSachChap.setAdapter(chapTruyenAdapter);
@@ -71,17 +72,19 @@ ChapTruyenAdapter chapTruyenAdapter;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Bundle b= new Bundle();
-                b.putString("idChap",arrChap.get(i).getId());
-                Intent intent= new Intent(ChapActivity.this,DocTruyenActivity.class);
-                intent.putExtra("data",b);
-                startActivity(intent);
+            b.putString("idChap",arrChap.get(i).getId());
+            Intent intent = new Intent(ChapActivity.this,DocTruyenActivity.class);
+            intent.putExtra("data",b);
+            startActivity(intent);
+
+
             }
         });
 }
 
     @Override
     public void batDau() {
-        Toast.makeText(this,"Lay Chap Ve",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Đang tải!!",Toast.LENGTH_SHORT).show();
 
 
     }

@@ -21,6 +21,15 @@ public class ChapTruyen {
         this.ngayDang= ngayDang;
 
     }
+    public String getId(){
+        return id;
+
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public  ChapTruyen(String tenChap, String ngayDang){
         this.tenChap=tenChap;
         this.ngayDang= ngayDang;
@@ -30,16 +39,11 @@ public class ChapTruyen {
     public ChapTruyen(JSONObject o) throws JSONException {
         tenChap= o.getString("tenchap");
         ngayDang= o.getString("ngaynhap");
+        id= o.getString("id");
 
 
 
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 }

@@ -1,16 +1,33 @@
 package vn.edu.poly.apptruyen;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.chrisbanes.photoview.PhotoView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,96 +40,41 @@ import vn.edu.poly.apptruyen.api.ApiLayTruyen;
 import vn.edu.poly.apptruyen.interfaces.LayTruyenVe;
 import vn.edu.poly.apptruyen.object.TruyenTranh;
 
-public class MainActivity extends AppCompatActivity implements LayTruyenVe {
-    GridView gdvDSTruyen;
-    TruyenTranhAdapter adapter;
-    ArrayList<TruyenTranh> truyenTranhArrayList;
-    EditText edtTimKiem;
+public class MainActivity extends AppCompatActivity {
+    ProgressBar progressBar;
+    TextView textView;
+
+    private float mScale = 1f;
+    private ScaleGestureDetector mScaleDetector;
+    GestureDetector gestureDetector;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
-        anhXa();
-        setUp();
-        setClick();
-        new ApiLayTruyen(this).execute();
-    }
-    private void init(){
-        truyenTranhArrayList= new ArrayList<>();
 
-        adapter= new TruyenTranhAdapter(this,0, truyenTranhArrayList);
-    }
-    private void anhXa(){
-        gdvDSTruyen= findViewById(R.id.gdvDSTruyen);
-        edtTimKiem= findViewById(R.id.edtTimKiem);
-    }
-    private void setUp(){
-        gdvDSTruyen.setAdapter(adapter);
-    }
-    private void setClick(){
-        edtTimKiem.addTextChangedListener(new TextWatcher() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        progressBar =findViewById(R.id.progress_bar);
+        textView= findViewById(R.id.text_view);
 
-            }
+        progressBar.setMax(100);
+        progressBar.setScaleY(3f);
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        progressAnimation();
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                String s= edtTimKiem.getText().toString();
-                adapter.sortTruyen(s);
-
-            }
-        });
-        gdvDSTruyen.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TruyenTranh truyenTranh= truyenTranhArrayList.get(i);
-                Bundle b= new Bundle();
-                b.putSerializable("truyen",truyenTranh);
-                Intent intent= new Intent(MainActivity.this,ChapActivity.class);
-                intent.putExtra("data",b);
-                startActivity(intent);
-            }
-        });
-    }
-
-    @Override
-    public void batDau() {
-        Toast.makeText(this,"Dang Lay Ve", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void ketThuc(String data) {
-        try {
-            truyenTranhArrayList.clear();
-            JSONArray arr = new JSONArray(data);
-            for (int i = 0; i < arr.length(); i++) {
-                JSONObject o = arr.getJSONObject(i);
-                truyenTranhArrayList.add(new TruyenTranh(o));
-            }
-            adapter= new TruyenTranhAdapter(this,0, truyenTranhArrayList);
-            gdvDSTruyen.setAdapter(adapter);
-        } catch (JSONException e) {
-
-        }
-    }
-
-    @Override
-    public void biLoi() {
-        Toast.makeText(this,"Loi Ket Noi", Toast.LENGTH_SHORT).show();
 
     }
 
-    public void update(View view) {
-        new ApiLayTruyen(this).execute();
+
+
+
+
+    public  void progressAnimation(){
+        ProgressBarAnimation amin= new ProgressBarAnimation(this,progressBar,textView,0f,100f);
+        amin.setDuration(8000);
+        progressBar.setAnimation(amin);
     }
+
 }

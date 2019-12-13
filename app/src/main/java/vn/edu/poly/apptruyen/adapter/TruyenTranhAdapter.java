@@ -8,8 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 
 import com.bumptech.glide.Glide;
 
@@ -23,7 +22,7 @@ public class TruyenTranhAdapter extends ArrayAdapter<TruyenTranh> {
     private Context ct;
     private ArrayList<TruyenTranh> arr;
 
-    public TruyenTranhAdapter(@NonNull Context context, int resource, @NonNull List<TruyenTranh> objects) {
+    public TruyenTranhAdapter(Context context, int resource, List<TruyenTranh> objects) {
         super(context, resource, objects);
         this.ct = context;
         this.arr = new ArrayList<>(objects);

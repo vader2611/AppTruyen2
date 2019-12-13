@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +18,15 @@ import vn.edu.poly.apptruyen.object.ChapTruyen;
 public class ChapTruyenAdapter extends ArrayAdapter<ChapTruyen> {
     private Context ct;
     private ArrayList<ChapTruyen> arr;
-    public ChapTruyenAdapter(@NonNull Context context, int resource, @NonNull List<ChapTruyen> objects) {
+    public ChapTruyenAdapter(Context context, int resource, List<ChapTruyen> objects) {
         super(context, resource, objects);
         this.ct= context;
         this.arr= new ArrayList<>(objects);
     }
 
-    @NonNull
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView==null){
             LayoutInflater inflater= (LayoutInflater)ct.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView= inflater.inflate(R.layout.item_chap_truyen,null);

@@ -6,14 +6,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/manhinhchao"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-    >
-        <activity android:name=".object.DocTruyenActivity"></activity>
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ManHinhChuActivity"></activity>
+        <activity android:name=".object.DocTruyenActivity" />
         <activity android:name=".ChapActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -33,7 +33,7 @@ public class DocTruyenActivity extends AppCompatActivity implements LayAnhVe {
         anhXa();
         setUp();
         setClick();
-        new ApiLayAnh(this).execute();
+        new ApiLayAnh(this, idChap).execute();
 
     }
     private void init(){
